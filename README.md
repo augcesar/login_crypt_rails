@@ -19,29 +19,32 @@ Or install it yourself as:
 
 ## Usage
 
-##### ::: ApplicationController :::
-
+###ApplicationController
+```
   include LoginCrypt
   helper_method :login_crypt_sessao_seq, :login_crypt_sessao_inputs
+```
 
+###LoginController
 
-##### ::: LoginController :::
-
+```
   before_filter :only => :index do
-    login_crypt_sessao_seq ["login","senha"]
+    login_crypt_sessao_seq ["senha"]
   end
-
+```
+```
   before_filter :only => :checa_usuario do
     login_crypt_checar_sessao_seq
   end
- 
-##### ::: LoginView :::
+```
+
+###LoginView
   
-  Javascript Original
-  <%= render "login_crypt/form", seletor_form: "#form-login" %>
+  `<%= render "login_crypt/form", seletor_form: "#form-login" %>`
   
-  Javascript Comprimido
-  <%= render "login_crypt/form_compress", seletor_form: "#form-login" %>
+  ou
+  
+  `<%= render "login_crypt/form_compress", seletor_form: "#form-login" %>`
 
 
 ## Contributing
