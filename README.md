@@ -19,13 +19,13 @@ Or install it yourself as:
 
 ## Usage
 
-::: ApplicationController :::
+##### ::: ApplicationController :::
 
   include LoginCrypt
   helper_method :login_crypt_sessao_seq, :login_crypt_sessao_inputs
 
 
-::: LoginController :::
+##### ::: LoginController :::
 
   before_filter :only => :index do
     login_crypt_sessao_seq ["login","senha"]
@@ -35,7 +35,7 @@ Or install it yourself as:
     login_crypt_checar_sessao_seq
   end
  
-::: LoginView :::
+##### ::: LoginView :::
   
   Javascript Original
   <%= render "login_crypt/form", seletor_form: "#form-login" %>
