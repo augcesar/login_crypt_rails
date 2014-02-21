@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    login_crypt_seletor_form = "<%= seletor_form %>"
+    login_crypt_input_crypt  = "<%= login_crypt_sessao_inputs %>".split(",")
+
+    $(login_crypt_seletor_form).on('submit',function(e){
+      e.preventDefault();
+
+      var inputs = $(this).find("input")
+
+      inputs.each(function(){
+        if (login_crypt_input_crypt.indexOf( $(this).attr("name") ) > -1)
+          $(this).val( login_crypt_form( $(this).val() ) )
+      })
+
+      $(this).off("submit").submit()
+    })
+
+    function login_crypt_form(value) {
+      var lcss    = <%= login_crypt_sessao_seq %>
+      var retorno = []
+      
+      $.each( lcss , function( k, v ) { 
+        retorno[ k ] = value.split("")[ v ]
+        if (value.split("")[ v ] == undefined)
+          retorno[ k ] = " "
+      })
+
+      if (lcss.length < value.length)
+        for (i = lcss.length ; i < value.length ; i++) { 
+          retorno[ i ] = value[ i ]
+        }
+
+      return retorno.join("")
+    }
+</script>
