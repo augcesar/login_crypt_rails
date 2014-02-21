@@ -1,6 +1,7 @@
 # LoginCrypt
 
-TODO: Write a gem description
+Conexões HTTP são inseguras e podem ser capturadas em redes abertas.
+Com o LoginCrypt, a senha do seu formulário html é EMBARALHADA.
 
 ## Installation
 
@@ -18,7 +19,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+::: ApplicationController :::
+
+  include LoginCrypt
+  helper_method :login_crypt_sessao_seq, :login_crypt_sessao_inputs
+
+
+::: LoginController :::
+
+  before_filter :only => :index do
+    login_crypt_sessao_seq ["login","senha"]
+  end
+
+  before_filter :only => :checa_usuario do
+    login_crypt_checar_sessao_seq
+  end
+ 
+::: LoginView :::
+  
+  Javascript Original
+  <%= render "login_crypt/form", seletor_form: "#form-login" %>
+  
+  Javascript Comprimido
+  <%= render "login_crypt/form_compress", seletor_form: "#form-login" %>
+
 
 ## Contributing
 
